@@ -24,6 +24,7 @@ public class playerController : MonoBehaviour
     void Update()
     {
         Movement();
+        Sprint();
     }
 
     void Movement()
@@ -42,4 +43,18 @@ public class playerController : MonoBehaviour
 
     }
 
+    void Sprint()
+    {
+        if (Input.GetButtonDown("Sprint"))
+        {
+            speed *= sprintMod;
+            isSprinting = true;
+        }
+
+        else if (Input.GetButtonUp("Sprint"))
+        {
+            speed /= sprintMod;
+            isSprinting = false;
+        }
+    }
 }
