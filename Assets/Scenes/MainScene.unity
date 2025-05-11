@@ -15112,8 +15112,9 @@ MonoBehaviour:
   controller: {fileID: 1070024649}
   speed: 5
   sprintMod: 2
-  jumpForce: 0
-  gravity: 1
+  jumpMax: 1
+  jumpForce: 12
+  gravity: 35
 --- !u!1 &1071934841
 GameObject:
   m_ObjectHideFlags: 0

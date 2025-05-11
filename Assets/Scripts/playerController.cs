@@ -6,8 +6,11 @@ public class playerController : MonoBehaviour
 
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
+    [SerializeField] int jumpMax;
     [SerializeField] int jumpForce;
     [SerializeField] int gravity;
+
+    int jumpCount;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -30,16 +33,19 @@ public class playerController : MonoBehaviour
     void Movement()
     {
         if (controller.isGrounded)
+        {
+            jumpCount = 0;
             playerVel = Vector3.zero;
+        }
 
         moveDir = (Input.GetAxis("Horizontal") * transform.right) + (Input.GetAxis("Vertical") * transform.forward);
 
         controller.Move(moveDir * speed * Time.deltaTime);
 
-       // Jump();
+        Jump();
 
         controller.Move(playerVel * Time.deltaTime);
-        playerVel.y = gravity * Time.deltaTime;
+        playerVel.y -= gravity * Time.deltaTime;
 
     }
 
@@ -55,6 +61,15 @@ public class playerController : MonoBehaviour
         {
             speed /= sprintMod;
             isSprinting = false;
+        }
+    }
+
+    void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        {
+            jumpCount++;
+            playerVel.y = jumpForce;
         }
     }
 }
